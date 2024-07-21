@@ -1,2 +1,48 @@
 ---
-# tasks file for ansible-python
+- name: Ensure build dependencies are installed
+  apt:
+    name: 
+      - build-essential
+      - zlib1g-dev
+      - libncurses5-dev
+      - libgdbm-dev
+      - libnss3-dev
+      - libssl-dev
+      - libreadline-dev
+      - libffi-dev
+      - curl
+      - libbz2-dev
+    state: present
+    update_cache: true
+
+- name: Download Python source
+  get_url:
+    url: "https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz"
+    dest: "/tmp/Python-{{ python_version }}.tgz"
+
+- name: Extract Python source
+  unarchive:
+    src: "/tmp/Python-{{ python_version }}.tgz"
+    dest: "/tmp"
+    remote_src: true
+
+- name: Build and install Python
+  command: "./configure --enable-optimizations && make -j 4 && make altinstall"
+  args:
+    chdir: "/tmp/Python-{{ python_version }}"
+
+# - name: Ensure /usr/local/bin/python3 is a symlink to the new Python binary
+#   file:
+#     src: "/usr/local/bin/python{{ python_version | regex_replace('\\.([0-9]+)$', '') }}"
+#     dest: "/usr/local/bin/python3"
+#     state: link
+#     force: true
+
+- name: Clean up
+  file:
+    path: 
+    state: absent
+  with_items:
+    - "/tmp/Python-{{ python_version }}.tgz"
+    - "/tmp/Python-{{ python_version }}"
+
