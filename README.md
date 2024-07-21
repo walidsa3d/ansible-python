@@ -1,17 +1,18 @@
-Role Name
+Ansible-Python
 =========
 
-An Ansible role to install python3 on ubuntu.
+An Ansible role to install python3 on Ubuntu.
 
 Requirements
 ------------
 
 - None
 
-Role Variables
+Variables
 --------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yaml
+python_version: 3.12.0
+```
 
 Dependencies
 ------------
@@ -19,11 +20,11 @@ Dependencies
 
 Example Playbook
 ----------------
-
-- hosts: servers
+```yaml
+- hosts: all
   roles:
-    - { role: username.rolename, x: 42 }
-
+    - ansible_python
+```
 License
 -------
 
