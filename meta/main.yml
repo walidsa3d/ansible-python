@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: ansible_python
+  role_name: python3
   author: walidsa3d
   description: Install Python 3.x on ubuntu
   license: MIT
@@ -8,4 +8,6 @@ galaxy_info:
   - name: Ubuntu
     versions:
     - all
-  galaxy_tags: []
+  galaxy_tags:
+    - python
+    - python3
