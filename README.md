@@ -2,6 +2,15 @@ Ansible-Python
 =========
 
 An Ansible role to install python3 on Ubuntu.
+![Ansible Role](https://img.shields.io/ansible/role/d/walidsa3d/python)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/walidsa3d/python/main.yml)
+
+Install
+------------
+```
+ansible-galaxy role install walidsa3d.python
+
+```
 
 Requirements
 ------------
@@ -23,7 +32,7 @@ Example Playbook
 ```yaml
 - hosts: all
   roles:
-    - ansible_python
+    - walidsa3d.python
 ```
 License
 -------
