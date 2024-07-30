@@ -1,6 +1,6 @@
 ---
 - name: Ensure build dependencies are installed
-  apt:
+  ansible.builtin.apt:
     name: 
       - build-essential
       - zlib1g-dev
@@ -16,18 +16,18 @@
     update_cache: true
 
 - name: Download Python source
-  get_url:
+  ansible.builtin.get_url:
     url: "https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz"
     dest: "/tmp/Python-{{ python_version }}.tgz"
 
 - name: Extract Python source
-  unarchive:
+  ansible.builtin.unarchive:
     src: "/tmp/Python-{{ python_version }}.tgz"
     dest: "/tmp"
     remote_src: true
 
 - name: Build and install Python
-  command: "./configure --enable-optimizations && make -j 4 && make altinstall"
+  ansible.builtin.command: "./configure --enable-optimizations && make -j 4 && make altinstall"
   args:
     chdir: "/tmp/Python-{{ python_version }}"
 
@@ -39,7 +39,7 @@
 #     force: true
 
 - name: Clean up
-  file:
+  ansible.builtin.file:
     path: 
     state: absent
   with_items:
